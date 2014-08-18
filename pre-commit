@@ -19,5 +19,11 @@ elif [[ "$FILE" =~ ^.+(yml)$ ]]; then
         echo "Aborting commit due to files with syntax errors" >&2
         exit 1
     fi
+elif [[ "$FILE" =~ ^.+(css)$ ]]; then
+    csslint --quiet $FILE
+    if [ $? -ne 0 ]; then
+        echo "Aborting commit due to files with syntax errors" >&2
+        exit 1
+    fi
 fi
 done
